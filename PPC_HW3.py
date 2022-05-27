@@ -70,7 +70,7 @@ class BaseStockDP:
                 self.theta[t][x] = (x<self.optimal_S[t])*(self.Hy[t][dp.optimal_S[t]]) + (x>=self.optimal_S[t])*(self.Hy[t][x]) - c*x
                 self.y[t][x] = (x<self.optimal_S[t])*(self.optimal_S[t]) + (x>=self.optimal_S[t])*x
 
-if __name__ == '__main__':
+def main():
     input_list = input("T, c, h, p, gamma ,mu, sigma = ")
     param_list = [float(i) for i in input_list.split(',')]
     T = param_list[0]
@@ -94,3 +94,7 @@ if __name__ == '__main__':
             pd.DataFrame([dp.optimal_S]).to_csv('optimal_S.csv',index=True)
             pd.DataFrame(dp.theta).to_csv('theta.csv',index=True)
             pd.DataFrame(dp.y).to_csv('y.csv',index=True)
+
+
+if __name__ == '__main__':
+    main()
