@@ -67,22 +67,10 @@ class BaseStockDP:
     def answer(self):
         for t in range(T,0,-1):
             for x in list(self.Hy[t].keys()):
-                self.theta[t][x] = (x<self.optimal_S[t])*(self.Hy[t][dp.optimal_S[t]]) + (x>=self.optimal_S[t])*(self.Hy[t][x]) - c*x
+                self.theta[t][x] = (x<self.optimal_S[t])*(self.Hy[t][self.optimal_S[t]]) + (x>=self.optimal_S[t])*(self.Hy[t][x]) - c*x
                 self.y[t][x] = (x<self.optimal_S[t])*(self.optimal_S[t]) + (x>=self.optimal_S[t])*x
 
 def main():
-    input_list = input("T, c, h, p, gamma ,mu, sigma = ")
-    param_list = [float(i) for i in input_list.split(',')]
-    T = param_list[0]
-    C = param_list[1]
-    h = param_list[2]
-    p = param_list[3]
-    gamma = param_list[4]
-    mu = param_list[5]
-    sigma = param_list[6]
-    max_ = mu+6*sigma
-    min_ = mu-6*sigma
-    step_size = 0.001*sigma
     print("Solve Start")
     dp = BaseStockDP()
     dp.solve()
@@ -97,4 +85,16 @@ def main():
 
 
 if __name__ == '__main__':
+    input_list = input("T, c, h, p, gamma ,mu, sigma = ")
+    param_list = [float(i) for i in input_list.split(',')]
+    T = int(param_list[0])
+    c = param_list[1]
+    h = param_list[2]
+    p = param_list[3]
+    gamma = param_list[4]
+    mu = param_list[5]
+    sigma = param_list[6]
+    max_ = int(mu+6*sigma)
+    min_ = int(mu-6*sigma)
+    step_size = 0.01*sigma
     main()
